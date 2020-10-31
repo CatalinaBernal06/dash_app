@@ -3,6 +3,7 @@ Module doc string
 """
 from apps.forecasts_page import FORECASTS_PAGE
 import dash
+
 from dash_bootstrap_components._components.DropdownMenu import DropdownMenu
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -31,6 +32,7 @@ BODY = html.Div(
 #  Create app
 """
 app = dash.Dash(__name__)
+server = app.server
 # server = app.server  # for Heroku deployment
 app.layout = html.Div(children=[NAVBAR, URL, BODY])
 
