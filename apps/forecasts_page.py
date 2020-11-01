@@ -15,7 +15,7 @@ FORECASTS_PAGE = html.Div(
                             dbc.Col(
                                 html.Div(
                                     html.H2(
-                                        'Predict demand based on different variables', 
+                                        'Predicted demand based on different variables', 
                                         style={'text-align': 'center'}
                                     ),
                                 ),
