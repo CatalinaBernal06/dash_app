@@ -110,7 +110,7 @@ GEOGRAPHIC_DESCRIPTION_PAGE = html.Div(
                         dbc.Col(
                             [
                                 html.H4(
-                                    'Selected: All',
+                                    'Department: All',
                                     id = 'map_label_selected'
                                 ),
                                 dcc.Loading(
