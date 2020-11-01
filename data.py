@@ -152,6 +152,9 @@ def preprocessing_maps(df):
     return df
 
 data = preprocessing(data)
+data['COLOR_COME_AGRUP'] = data['COLOR_COME_AGRUP'].replace({'Azul': 'Blue', 'Gris':'Gray', 'Rosado':'Pink',
+         'Café':'Brown', 'Morado':'Purple', 'Amarillo':'Yellow', 'Blanco': 'White',
+         'Verde':'Green', 'Negro': 'Black', 'Rojo':'Red', 'Naranja': 'Orange', 'MIXTO': 'Mix'})
 data_maps = preprocessing_maps(data_maps)
 
 
