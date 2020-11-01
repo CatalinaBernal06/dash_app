@@ -5,13 +5,6 @@ import dash_html_components as html
 
 import data
 
-dropdown_group_desc_list = list(data.data['GRUPO_ARTICULO'].unique())
-dropdown_color_desc_list = list(data.data['COLOR_COME_AGRUP'].unique())
-dropdown_size_desc_list = list(data.data['TALLA_EDAD'].unique())
-
-dropdown_group_desc_list.append('All')
-dropdown_color_desc_list.append('All')
-dropdown_size_desc_list.append('All')
 
 DESCRIPTION_PAGE = html.Div(
     [
@@ -23,7 +16,7 @@ DESCRIPTION_PAGE = html.Div(
                             dbc.Col(
                                 html.Div(
                                     html.H2(
-                                        'Select whether you want to visualize all data or only for classification "Moda"', 
+                                        'Characterization of demand and price in terms of different variables. Visualizations only for 2020.', 
                                         style={'text-align': 'center'}
                                     ),
                                 ),
@@ -33,41 +26,6 @@ DESCRIPTION_PAGE = html.Div(
                             )
                         ]
                     ),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    html.Button(
-                                    'ONLY MODA', 
-                                    className = 'btn btn-outline-warning active',
-                                    style = {'width': '80%'},
-                                    id = 'button_moda_desc'
-                                    ),
-                                ],
-                                style={
-                                    'width': 4, 
-                                    'justify-content': 'center', 
-                                    'display': 'flex'
-                                    }
-                            ),
-                            dbc.Col(
-                                [
-                                    html.Button(
-                                    'ALL DATA', 
-                                    className = 'btn btn-outline-warning',
-                                    style = {'width': '80%'},
-                                    id = 'button_all_desc'
-                                    ),
-                                ],
-                                style={
-                                    'width': 4, 
-                                    'justify-content': 'center', 
-                                    'display': 'flex'
-                                    }
-                            )
-                        ],
-                        justify = 'center'
-                    )
                 ],
             ),
             className = 'jumbotron',
@@ -189,7 +147,7 @@ DESCRIPTION_PAGE = html.Div(
                                                         dbc.Col(
                                                             dcc.Dropdown(
                                                                 options=[
-                                                                    {'label': val, 'value': val} for val in dropdown_group_desc_list
+                                                                    {'label': val, 'value': val} for val in data.dropdown_group_desc_list
                                                                 ],
                                                                 value='All',
                                                                 id = 'dropdown_group_desc'
@@ -218,7 +176,7 @@ DESCRIPTION_PAGE = html.Div(
                                                         dbc.Col(
                                                             dcc.Dropdown(
                                                                 options=[
-                                                                    {'label': val, 'value': val} for val in dropdown_color_desc_list
+                                                                    {'label': val, 'value': val} for val in data.dropdown_color_desc_list
                                                                 ],
                                                                 value='All',
                                                                 id = 'dropdown_color_desc'
@@ -251,7 +209,7 @@ DESCRIPTION_PAGE = html.Div(
                                                         dbc.Col(
                                                             dcc.Dropdown(
                                                                 options=[
-                                                                    {'label': val, 'value': val} for val in dropdown_size_desc_list
+                                                                    {'label': val, 'value': val} for val in data.dropdown_size_desc_list
                                                                 ],
                                                                 value='All',
                                                                 id = 'dropdown_size_desc'
@@ -290,7 +248,7 @@ DESCRIPTION_PAGE = html.Div(
                                     className = 'card',
                                     style = {
                                     'margin-top': '5%'
-                                }
+                                    }
                                 ),
                                 className = 'col-4',
                             ),
@@ -309,3 +267,39 @@ DESCRIPTION_PAGE = html.Div(
         )
     ],
 )
+
+                    # dbc.Row(
+                    #     [
+                    #         dbc.Col(
+                    #             [
+                    #                 html.Button(
+                    #                 'ONLY MODA', 
+                    #                 className = 'btn btn-outline-warning active',
+                    #                 style = {'width': '80%'},
+                    #                 id = 'button_moda_desc'
+                    #                 ),
+                    #             ],
+                    #             style={
+                    #                 'width': 4, 
+                    #                 'justify-content': 'center', 
+                    #                 'display': 'flex'
+                    #                 }
+                    #         ),
+                    #         dbc.Col(
+                    #             [
+                    #                 html.Button(
+                    #                 'ALL DATA', 
+                    #                 className = 'btn btn-outline-warning',
+                    #                 style = {'width': '80%'},
+                    #                 id = 'button_all_desc'
+                    #                 ),
+                    #             ],
+                    #             style={
+                    #                 'width': 4, 
+                    #                 'justify-content': 'center', 
+                    #                 'display': 'flex'
+                    #                 }
+                    #         )
+                    #     ],
+                    #     justify = 'center'
+                    # )
