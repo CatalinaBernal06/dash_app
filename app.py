@@ -31,7 +31,7 @@ BODY = html.Div(
 #  Create app
 """
 app = dash.Dash(__name__)
-server = app.server  # for Heroku deployment
+server = app.server 
 app.layout = html.Div(children=[NAVBAR, URL, BODY])
 
 
