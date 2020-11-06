@@ -1,7 +1,7 @@
 """
 Module doc string
 """
-from apps.forecasts_page import FORECASTS_PAGE
+
 import dash
 from dash_bootstrap_components._components.DropdownMenu import DropdownMenu
 import dash_bootstrap_components as dbc
@@ -14,6 +14,7 @@ from apps.home_page import HOME_PAGE
 from apps.description_page import DESCRIPTION_PAGE
 from apps.geographic_description import GEOGRAPHIC_DESCRIPTION_PAGE
 from apps.forecasts_page import FORECASTS_PAGE
+from apps.about_page import ABOUT_PAGE
 
 import data
 
@@ -31,7 +32,7 @@ BODY = html.Div(
 #  Create app
 """
 app = dash.Dash(__name__)
-server = app.server 
+server = app.server
 app.layout = html.Div(children=[NAVBAR, URL, BODY])
 
 
@@ -63,7 +64,7 @@ def description_tab(path):
     elif path == '/Forecasts':
         return not_activated, not_activated, not_activated, activated, not_activated, FORECASTS_PAGE
     elif path == '/About':
-        return not_activated, not_activated, not_activated, activated, HOME_PAGE
+        return not_activated, not_activated, not_activated, not_activated, activated, ABOUT_PAGE
 
 ## Change demand graph depending on selected variable on dropdown
 @app.callback(
@@ -83,15 +84,15 @@ def set_graph_price_choose_variable(val):
 
 ## Change demand vs price graph depending on selected variable on dropdown
 @app.callback(
-    Output(component_id='graph_variable_demand_price', component_property='figure'),
+    Output(component_id='graph_variable_demand_predict', component_property='figure'),
     [
         Input(component_id='dropdown_group_desc', component_property='value'),
         Input(component_id='dropdown_color_desc', component_property='value'),
         Input(component_id='dropdown_size_desc', component_property='value'),
     ]
 )
-def set_graph_price_choose_variable(v1,v2,v3):
-    return data.demand_vs_price(v1,v2,v3)
+def set_graph_predict_choose_variable(v1,v2,v3):
+    return data.demand_catalogue_predict(v1,v2,v3)
 
 #Click on map
 @app.callback(
@@ -104,7 +105,7 @@ def set_graph_price_choose_variable(v1,v2,v3):
         Input(component_id='map', component_property='clickData'),
         Input(component_id='dropdown_group_geo', component_property='value')
     ]
-    
+
 )
 def select_box_table_geographic_description(map_click,dropdown):
 
@@ -113,14 +114,14 @@ def select_box_table_geographic_description(map_click,dropdown):
 
     if not ctx.triggered:
         button_id = 'No clicks yet'
-        return 'Selected: All', dash.no_update, dash.no_update
+        return 'Department: All', dash.no_update, dash.no_update
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         if button_id == 'map':
             department = map_click['points'][0]['location']
-            return 'Selected: ' + department, dash.no_update, data.box_catalogue_department(dropdown, department)
+            return 'Department: ' + department, dash.no_update, data.box_catalogue_department(dropdown, department)
         elif button_id == 'dropdown_group_geo':
-            return 'Selected: All', data.map(dropdown), data.box_catalogue_department(dropdown)
+            return 'Department: All', data.map(dropdown), data.box_catalogue_department(dropdown)
 
 """
 #  MAIN
