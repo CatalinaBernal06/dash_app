@@ -15,7 +15,7 @@ FORECASTS_PAGE = html.Div(
                             dbc.Col(
                                 html.Div(
                                     html.H2(
-                                        'Predicted demand based on different variables', 
+                                        'Predicted demand based on different variables',
                                         style={'text-align': 'center'}
                                     ),
                                 ),
@@ -69,7 +69,7 @@ FORECASTS_PAGE = html.Div(
                                                         [
                                                             dbc.Col(
                                                                 html.H4('Group of the product'),
-                                                                className = 'col-4',
+                                                                className = 'pb-auto',
                                                                 style = {
                                                                     'margin': 'auto'
                                                                 }
@@ -98,7 +98,7 @@ FORECASTS_PAGE = html.Div(
                                                         [
                                                             dbc.Col(
                                                                 html.H4('Color'),
-                                                                className = 'col-4',
+                                                                className = 'pb-auto',
                                                                 style = {
                                                                     'margin': 'auto'
                                                                 }
@@ -131,7 +131,7 @@ FORECASTS_PAGE = html.Div(
                                                         [
                                                             dbc.Col(
                                                                 html.H4('Size'),
-                                                                className = 'col-4',
+                                                                className = 'pb-auto',
                                                                 style = {
                                                                     'margin': 'auto'
                                                                 }
@@ -176,7 +176,7 @@ FORECASTS_PAGE = html.Div(
                                 [
                                     dcc.Loading(
                                         dcc.Graph(
-                                            id = 'graph_variable_demand_price',
+                                            id = 'graph_variable_demand_predict',
                                         ),
                                     ),
                                     html.Div(
