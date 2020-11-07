@@ -72,7 +72,7 @@ def description_tab(path):
     Input(component_id='dropdown_demand', component_property='value')
 )
 def set_graph_demand_choose_variable(val):
-    return data.boxplot_choose_variable(val, 'DDA_UND')
+    return data.boxplot_choose_variable(val, 'quantity demanded')
 
 ## Change graph depending on selected variable on dropdown
 @app.callback(
@@ -80,7 +80,7 @@ def set_graph_demand_choose_variable(val):
     Input(component_id='dropdown_price', component_property='value')
 )
 def set_graph_price_choose_variable(val):
-    return data.boxplot_choose_variable(val, 'PRECIO_CATALOGO')
+    return data.boxplot_choose_variable(val, 'Price')
 
 ## Change demand vs price graph depending on selected variable on dropdown
 @app.callback(
