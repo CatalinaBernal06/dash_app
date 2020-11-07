@@ -48,7 +48,7 @@ import plotly.graph_objects as go
 #     ]
 # )
 
-data = pd.read_csv('data_moda.csv', sep = ',')
+data = pd.read_csv('data_moda_description.csv', sep = ',')
 data = data.rename(columns = {'precio': 'Price', 'dda':'quantity demanded'})
 data_maps = pd.read_csv('campaign_with_departments.csv', sep = ',', encoding='latin-1')
 
