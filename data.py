@@ -56,7 +56,7 @@ with open('colombia_geo.json') as file:
     colombia_geo = json.load(file)
 
 dropdown_variables_spa = ['campaign', 'garment_type', 'article_group',
-                     'mundo', 'clasificacion', 'pagina', 'num_apariciones', 'peso_exhibicion',
+                     'section_mundo', 'clasificacion', 'pagina', 'num_apariciones', 'peso_exhibicion',
                      'TALLA_EDAD', 'color']
 dropdown_variables_eng = ['Catalogue number', 'Type of clothing (Tipo Prenda)', 'Group of clothing',
                         'Section', 'Classification', 'Page number', 'Number of times shown on catalogue',
