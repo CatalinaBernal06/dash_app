@@ -26,7 +26,7 @@ ABOUT_PAGE = html.Div(
                                         html.Img(src='/../assets/photos_/IlanReinstein.jpeg', className='div-for-image-team',
                                             style={'height':'78%', 'width':'45%'}),
                                         html.Div('Ilan Reinstein', className='font-weight-bold text-names-team font-medium'),
-                                        html.Div('proff', className='text-subtitle-team'),
+                                        html.Div('-', className='text-subtitle-team'),
 
                                         html.Div(
                                             html.A(
@@ -43,7 +43,7 @@ ABOUT_PAGE = html.Div(
                                         html.Img(src='/../assets/photos_/DanielBorda.jpeg', className='div-for-image-team',
                                             style={'height':'78%', 'width':'45%'}),
                                         html.Div('Daniel Borda', className='font-weight-bold text-names-team font-medium'),
-                                        html.Div('proff', className='text-subtitle-team'),
+                                        html.Div('-', className='text-subtitle-team'),
                                         html.Div(
                                             html.A(
                                                 html.Img(src = '/../assets/photos_/in_logo.png', style={'height': '5%', 'width':'5%'}),
@@ -73,9 +73,9 @@ html.Div(
                             html.Div(
                                 [
                                     html.Img(src='/../assets/photos_/KaryHerrera.jpeg', className='div-for-image-team',
-                                        style={'height':'82%', 'width':'75%'}),
+                                        style={'height':'82%', 'width':'78%'}),
                                     html.Div('Kary Herrera', className='font-weight-bold text-names-team font-medium'),
-                                    html.Div('proff', className='text-subtitle-team'),
+                                    html.Div('-', className='text-subtitle-team'),
 
                                     html.Div(
                                         html.A(
@@ -90,9 +90,9 @@ html.Div(
                             html.Div(
                                 [
                                     html.Img(src='/../assets/photos_/DanielOtero.jpeg', className='div-for-image-team',
-                                        style={'height':'82%', 'width':'75%'}),
+                                        style={'height':'82%', 'width':'78%'}),
                                     html.Div('Daniel Otero', className='font-weight-bold text-names-team font-medium'),
-                                    html.Div('proff', className='text-subtitle-team'),
+                                    html.Div('-', className='text-subtitle-team'),
                                     html.Div(
                                         html.A(
                                             html.Img(src = '/../assets/photos_/in_logo.png', style={'height': '8%', 'width':'8%'}),
@@ -106,9 +106,9 @@ html.Div(
                             html.Div(
                                 [
                                     html.Img(src='/../assets/photos_/PaolaCruz.jpeg', className='div-for-image-team',
-                                        style={'height':'85%', 'width':'75%'}),
+                                        style={'height':'85%', 'width':'78%'}),
                                     html.Div('Paola Cruz', className='font-weight-bold text-names-team font-medium'),
-                                    html.Div('proff', className='text-subtitle-team'),
+                                    html.Div('-', className='text-subtitle-team'),
                                     html.Div(
                                         html.A(
                                             html.Img(src = '/../assets/photos_/in_logo.png', style={'height': '8%', 'width':'8%'}),
@@ -140,7 +140,7 @@ html.Div(
                                     html.Img(src='/../assets/photos_/DiegoRojas.jpeg', className='div-for-image-team',
                                         style={'height':'80%', 'width':'45%'}),
                                     html.Div('Diego Rojas', className='font-weight-bold text-names-team font-medium'),
-                                    html.Div('proff', className='text-subtitle-team'),
+                                    html.Div('-', className='text-subtitle-team'),
 
                                     html.Div(
                                         html.A(
@@ -158,7 +158,7 @@ html.Div(
                                     html.Img(src='/../assets/photos_/CatalinaBernal.jpeg', className='div-for-image-team',
                                         style={'height':'80%', 'width':'45%'}),
                                     html.Div('Catalina Bernal', className='font-weight-bold text-names-team font-medium'),
-                                    html.Div('proff', className='text-subtitle-team'),
+                                    html.Div('-', className='text-subtitle-team'),
                                     html.Div(
                                         html.A(
                                             html.Img(src = '/../assets/photos_/in_logo.png', style={'height': '5%', 'width':'5%'}),
