@@ -106,7 +106,7 @@ html.Div(
                             html.Div(
                                 [
                                     html.Img(src='/../assets/photos_/PaolaCruz.jpeg', className='div-for-image-team',
-                                        style={'height':'85%', 'width':'78%'}),
+                                        style={'height':'82%', 'width':'78%'}),
                                     html.Div('Paola Cruz', className='font-weight-bold text-names-team font-medium'),
                                     html.Div('-', className='text-subtitle-team'),
                                     html.Div(
