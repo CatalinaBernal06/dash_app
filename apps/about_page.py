@@ -178,6 +178,5 @@ html.Div(
         ],
         className = 'position-relative overflow-hidden text-center div-for-TEAM-65',
     ),
-
     ]
 )

@@ -110,15 +110,15 @@ GEOGRAPHIC_DESCRIPTION_PAGE = html.Div(
                         dbc.Col(
                             [
                                 html.H4(
-                                    'Department: All',
+                                    'Selected: All',
                                     id = 'map_label_selected'
                                 ),
                                 dcc.Loading(
-                                    dcc.Graph(
-                                        figure = data.map('CAMISA'),
-                                        id = 'map'
-                                    )
-                                ),
+                                        dcc.Graph(
+                                            figure = data.box_catalogue_department(),
+                                            id = 'box_departments'
+                                        )
+                                )
                             ],
                             className = 'col-8',
                         )
@@ -134,21 +134,32 @@ GEOGRAPHIC_DESCRIPTION_PAGE = html.Div(
                         [
                             dbc.Col(
                                 [
+                                    html.H4(
+                                        'Demand',
+                                    ),
                                     dcc.Loading(
                                         dcc.Graph(
-                                            figure = data.box_catalogue_department(),
-                                            id = 'box_departments'
+                                            figure = data.map(),
+                                            id = 'map_demand'
                                         )
-                                    )
+                                    ),
                                 ],
-                                className = 'col-12'
+                                className = 'col-6'
                             ),
-                            # dbc.Col(
-                            #     [
-
-                            #     ],
-                            #     className = 'col-6'
-                            # )
+                            dbc.Col(
+                                [
+                                    html.H4(
+                                        'Invoiced',
+                                    ),
+                                    dcc.Loading(
+                                        dcc.Graph(
+                                            figure = data.map(type = 'F'),
+                                            id = 'map_invoiced'
+                                        )
+                                    ),
+                                ],
+                                className = 'col-6'
+                            ),
                         ]
                     ),
                 ],
