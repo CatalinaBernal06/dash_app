@@ -117,7 +117,7 @@ HOME_PAGE = html.Div(
                     html.Div(
                             html.A(
                                 html.Img(
-                                    src='/../assets/photos_/corr_one_2.jpeg',
+                                    src='/../assets/assets/photos_/corr_one_2.jpeg',
                                     style = {
                                         'height':'100px',
                                         'padding-left': '20%'
@@ -132,7 +132,7 @@ HOME_PAGE = html.Div(
                     html.Div(
                             html.A(
                                 html.Img(
-                                    src='/../assets/photos_/mintic_logo.jpeg',
+                                    src='/../assets/assets/photos_/mintic_logo.jpeg',
                                     style = {
                                         'height': '100px',
                                         'padding-left': '25%'
