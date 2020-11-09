@@ -161,7 +161,7 @@ html.Div(
                                     html.Div('-', className='text-subtitle-team'),
                                     html.Div(
                                         html.A(
-                                            html.Img(src = '/../assets/photos_/in_logo.png', style={'height': '5%', 'width':'5%'}),
+                                            html.Img(src = '/../assets/assets/photos_/in_logo.png', style={'height': '5%', 'width':'5%'}),
                                                 href='https://www.linkedin.com/in/catalina-bernal-0612/', role="button",
                                         ),
                                         #className='social',
