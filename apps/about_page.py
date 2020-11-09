@@ -23,14 +23,14 @@ ABOUT_PAGE = html.Div(
                             [
                                 html.Div(
                                     [
-                                        html.Img(src='/../assets/photos_/IlanReinstein.jpeg', className='div-for-image-team',
+                                        html.Img(src='/../assets/assets/photos_/IlanReinstein.jpeg', className='div-for-image-team',
                                             style={'height':'78%', 'width':'45%'}),
                                         html.Div('Ilan Reinstein', className='font-weight-bold text-names-team font-medium'),
                                         html.Div('-', className='text-subtitle-team'),
 
                                         html.Div(
                                             html.A(
-                                                html.Img(src = '/../assets/photos_/in_logo.png', style={'height': '5%', 'width':'5%'}),
+                                                html.Img(src = '/../assets/assets/photos_/in_logo.png', style={'height': '5%', 'width':'5%'}),
                                                 href='https://www.linkedin.com/in/ireinstein/', role="button",
                                             ),
                                             className='social',
