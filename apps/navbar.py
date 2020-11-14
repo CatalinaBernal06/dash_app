@@ -1,3 +1,9 @@
+"""
+Navbar
+
+Bar at the top of the page. Contains all of the pages that the user can go to
+"""
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc

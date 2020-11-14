@@ -1,9 +1,18 @@
+"""
+Data
+
+Imports the data, cleans it and creates graphs according to what is needed. 
+Additionally, here the dropdown lists are created
+"""
+
 import pandas as pd
 import numpy as np
 import json
 import plotly.express as px
 import plotly.graph_objects as go
-#import sqlalchemy
+import pickle
+import pickle
+from sklearn.ensemble import GradientBoostingRegressor
 
 """
 #  Importing data
@@ -17,6 +26,10 @@ data_maps = data_maps.rename(columns = {'article group': 'article_group'})
 with open('colombia_geo.json') as file:
     colombia_geo = json.load(file)
 
+with open('model/config_dict.pkl', 'rb') as f:
+    config_dict = pickle.load(f)
+with open('model/gbm.pkl', 'rb') as f:
+    model = pickle.load(f)
 """
 #   Dropdowns
 """
@@ -43,7 +56,8 @@ dropdown_size_desc_list.append('All')
 dropdown_group_fc_list = list(data['article_group'].unique())
 dropdown_color_fc_list = list(data['color'].unique())
 dropdown_size_fc_list = list(data['TALLA_EDAD'].unique())
-dropdown_expo_type_fc_list = ['None', 'Modeled', 'Product photo', 'Modeled and product photo']
+dropdown_expo_type_fc_list = ['Modeled', 'Product photo', 'Modeled and product photo']
+# dropdown_expo_type_fc_list = ['0-18 mo', '1-5 yo', '6-16 yo','other']
 dropdown_gender_fc_list = ['Male', 'Female', 'Unisex']
 dropdown_page_fc_list = ['{}-{}'.format(a,a+19) for a in range(0,81,20)]
 
@@ -151,3 +165,105 @@ def demand_vs_price(v1,v2,v3):
     fig.update_xaxes(title_text= "Price ($)")
     fig.update_yaxes(title_text='Demand (units)')
     return fig
+
+"""
+ML Model
+"""
+def fun_user_input(precio_usuario,grupo_talla_usuario, tipo_item, color,exposicion_usuario, genero, expo_weight, rango_pagina):
+    data_user = pd.DataFrame(columns=['z_price', 'zoom', 'expo_weight',
+        'size_group_0-18 mo', 'size_group_1-5 yo', 'size_group_6-16 yo',
+        'size_group_other', 'size_group_unisex', 'item_group_accesories',
+        'item_group_bottoms', 'item_group_denim', 'item_group_full', 'item_group_tops',
+        'color_Amarillo', 'color_Azul', 'color_Blanco', 'color_Café',
+        'color_Gris', 'color_MIXTO', 'color_Morado', 'color_Naranja',
+        'color_Negro', 'color_Rojo', 'color_Rosado', 'color_Verde',
+        'gender_Femenino', 'gender_Masculino', 'gender_Otros', 'gender_Unisex',
+        'expo_type_FOTO PRODUCTO', 'expo_type_MODELADO',
+        'expo_type_MODELADO Y FOTO PRODUCTO', 'page_group_(0, 20]',
+        'page_group_(20, 40]', 'page_group_(40, 60]', 'page_group_(60, 100]',
+        'page_group_(100, 140]'])
+
+    #AGREGAR FILA A PARAMETRIZAR
+    data_user = data_user.append(pd.Series(), ignore_index=True)
+    data_user = data_user.fillna(0)
+
+    #CREAR DATOS ESTILO ALGORITMO
+    data_user['z_price'] = (precio_usuario - 55796.48)/  22988.660
+
+    if rango_pagina < 21:
+        data_user['page_group_(0, 20]'] = 1
+    elif rango_pagina < 41:
+        data_user['page_group_(20, 40]'] = 1
+    elif rango_pagina < 61:
+        data_user['page_group_(40, 60]'] = 1
+    elif rango_pagina < 101:
+        data_user['page_group_(60, 100]'] = 1
+    elif rango_pagina > 100:
+        data_user['page_group_(100, 140]'] = 1
+
+    if grupo_talla_usuario == '0 TO 24 MONTHS':
+        data_user['size_group_0-18 mo'] = 1
+    elif grupo_talla_usuario == '2 TO 5 YEARS':
+        data_user['size_group_1-5 yo'] = 1
+    elif grupo_talla_usuario == '6 TO 16 YEARS':
+        data_user['size_group_6-16 yo'] = 1
+    elif grupo_talla_usuario == 'NOT KNOWN':
+        data_user['size_group_other'] = 1
+    elif grupo_talla_usuario == 'UNISEX':
+        data_user['size_group_unisex'] = 1
+
+    if (tipo_item == 'T-SHIRT')   | (tipo_item == 'SWEATER OR JACKET')  | (tipo_item == 'SHIRT')  :
+        data_user['item_group_tops'] = 1
+    elif (tipo_item == 'LONG PANTS')   | (tipo_item == 'SHORTS')  | (tipo_item == 'SKIRT') :
+        data_user['item_group_bottoms'] = 1
+    elif (tipo_item == 'SET')   | (tipo_item == 'DRESS')  | (tipo_item == 'PAJAMA') | (tipo_item == 'OVERALL') | (tipo_item == 'BODY') | (tipo_item == 'OUTER SHIRT'):
+        data_user['item_group_full'] = 1
+    elif (tipo_item == 'ACCESSORY')   | (tipo_item == 'HAT') :
+        data_user['item_group_accesories'] = 1
+    elif (tipo_item == 'DENIM'):
+        data_user['item_group_denim'] = 1
+
+    if color == 'Yellow':
+        data_user['color_Amarillo'] = 1
+    elif color == 'Blue':
+        data_user['color_Azul'] = 1
+    elif color == 'White':
+        data_user['color_Blanco'] = 1
+    elif color == 'Brown':
+        data_user['color_Café'] = 1
+    elif color == 'Gray':
+        data_user['color_Gris'] = 1
+    elif color == 'Mix':
+        data_user['color_MIXTO'] = 1
+    elif color == 'Purple':
+        data_user['color_Morado'] = 1
+    elif color == 'Orange':
+        data_user['color_Naranja'] = 1
+    elif color == 'Black':
+        data_user['color_Negro'] = 1
+    elif color == 'Red':
+        data_user['color_Rojo'] = 1
+    elif color == 'Pink':
+        data_user['color_Rosado'] = 1
+    elif color == 'Green':
+        data_user['color_Verde'] = 1
+
+    if genero == 'Female':
+        data_user['gender_Femenino'] = 1
+    elif genero == 'Male':
+        data_user['gender_Masculino'] = 1
+    elif genero == 'Other':
+        data_user['gender_Otros'] = 1
+    elif genero == 'Unisex':
+        data_user['gender_Unisex'] = 1
+
+    if exposicion_usuario == 'Product photo':
+        data_user['expo_type_FOTO PRODUCTO'] = 1
+    elif exposicion_usuario == 'Modeled':
+        data_user['expo_type_MODELADO'] = 1
+    elif exposicion_usuario == 'Modeled and product photo':
+        data_user['expo_type_MODELADO Y FOTO PRODUCTO'] = 1
+
+        data_user['expo_weight'] = expo_weight
+
+    return np.round(model.predict(data_user),0)

@@ -1,3 +1,9 @@
+"""
+Forecasts page
+
+Here it is possible to predict demand and UPE for a product with the specified characteristics.
+"""
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -58,7 +64,8 @@ FORECASTS_PAGE = html.Div(
                                     html.P(
                                         """
                                         For each of the boxes shown below, choose an option if it is a dropdown or insert a value if it is an input box. After selecting a value for
-                                        each of the boxes, the prediction of the demand of the product with the selected features will be displayed below, along with its UPE.
+                                        each of the boxes, the prediction of the demand of the product with the selected features will be displayed below. You need to fill every box
+                                        for the model to run correctly.
                                         """,
                                         className = 'mb-0'
                                     )
@@ -93,6 +100,7 @@ FORECASTS_PAGE = html.Div(
                                                             'width': '100%',
                                                             'height': '57.5%',
                                                         },
+                                                        step = 1000
                                                     ),
                                                 ],
                                                 className = 'col-3',
@@ -225,12 +233,25 @@ FORECASTS_PAGE = html.Div(
                                                             'text-align': 'center'
                                                         }
                                                     ),
-                                                    dcc.Dropdown(
-                                                        options=[
-                                                            {'label': val, 'value': val} for val in data.dropdown_page_fc_list
-                                                        ],
-                                                        placeholder = 'Select',
-                                                        id = 'forecasts_page_number'
+                                                    # dcc.Dropdown(
+                                                    #     options=[
+                                                    #         {'label': val, 'value': val} for val in data.dropdown_page_fc_list
+                                                    #     ],
+                                                    #     placeholder = 'Select',
+                                                    #     id = 'forecasts_page_number'
+                                                    # ),
+                                                    dcc.Input(
+                                                        type = 'number',
+                                                        placeholder = 'Insert page number',
+                                                        style = {
+                                                            'border':'1px solid #bec3c9', 
+                                                            'width': '100%',
+                                                            'height': '57.5%',
+                                                        },
+                                                        id = 'forecasts_page_number',
+                                                        min = 0,
+                                                        max = 200,
+                                                        step = 1
                                                     ),
                                                 ],
                                                 className = 'col-3',
@@ -242,29 +263,29 @@ FORECASTS_PAGE = html.Div(
                             ),
                         ]
                     ),
-                    dbc.Row(
-                        dbc.Col(
-                            [
-                                html.H6(
-                                    'Select error margin',
-                                    style = {
-                                        'text-align': 'center'
-                                    }
-                                ),
-                                dcc.Slider(
-                                    min=0,
-                                    max=1,
-                                    step=None,
-                                    value=0.5,
-                                    marks = {
-                                        (str(i/100) if i % 100 != 0 else str(int(i/100))): (str(i/100) if i % 10 == 0 else "") for i in range(0,101,5)
-                                    },
-                                    id = 'forecasts_slider'
-                                ), 
-                            ],
-                            className = 'col-4'
-                        ),
-                    ),
+                    # dbc.Row(
+                    #     dbc.Col(
+                    #         [
+                    #             html.H6(
+                    #                 'Select error margin',
+                    #                 style = {
+                    #                     'text-align': 'center'
+                    #                 }
+                    #             ),
+                    #             dcc.Slider(
+                    #                 min=0,
+                    #                 max=1,
+                    #                 step=None,
+                    #                 value=0.5,
+                    #                 marks = {
+                    #                     (str(i/100) if i % 100 != 0 else str(int(i/100))): (str(i/100) if i % 10 == 0 else "") for i in range(0,101,5)
+                    #                 },
+                    #                 id = 'forecasts_slider'
+                    #             ), 
+                    #         ],
+                    #         className = 'col-4'
+                    #     ),
+                    # ),
                     dbc.Row(
                         dbc.Col(
                             html.Div(
@@ -312,7 +333,7 @@ FORECASTS_PAGE = html.Div(
                                                             }
                                                         ),
                                                     ),
-                                                    className = 'col-3',
+                                                    className = 'col-4',
                                                     style = {
                                                         'display': 'flex',
                                                         'align-items': 'center',
@@ -327,7 +348,7 @@ FORECASTS_PAGE = html.Div(
                                                             'margin': '0'
                                                         }
                                                     ),
-                                                    className = 'col-9',
+                                                    className = 'col-8',
                                                     style = {
                                                         'display': 'flex',
                                                         'align-items': 'center',
@@ -347,59 +368,59 @@ FORECASTS_PAGE = html.Div(
                             ),
                             className = 'col-6'
                         ),
-                        dbc.Col(
-                            html.Div(
-                                html.Div(
-                                    [
-                                        dbc.Row(
-                                            [
-                                                dbc.Col(
-                                                    dcc.Loading(
-                                                        html.H1(
-                                                            '0%',
-                                                            id = 'forecast_upe_value',
-                                                            style = {
-                                                                'color': '#1DC72D',
-                                                                'margin': '0',
-                                                                'font-size': '150px'
-                                                            }
-                                                        ),
-                                                    ),
-                                                    className = 'col-3',
-                                                    style = {
-                                                        'display': 'flex',
-                                                        'align-items': 'center',
-                                                        'justify-content': 'center',
-                                                        'padding-right': '0'
-                                                    }
-                                                ),
-                                                dbc.Col(
-                                                    html.H5(
-                                                        'is the UPE for the product with the selected characteristics',
-                                                        style = {
-                                                            'margin': '0'
-                                                        }
-                                                    ),
-                                                    className = 'col-9',
-                                                    style = {
-                                                        'display': 'flex',
-                                                        'align-items': 'center',
-                                                        'justify-content': 'center',
-                                                        'padding-left': '0'
-                                                    }
-                                                )
-                                            ]
-                                        )
-                                    ],
-                                    className = 'card-body',
-                                    style = {
-                                        'padding': '0'
-                                    }
-                                ),
-                                className = 'card border-danger mb-3',
-                            ),
-                            className = 'col-6'
-                        )
+                        # dbc.Col(
+                        #     html.Div(
+                        #         html.Div(
+                        #             [
+                        #                 dbc.Row(
+                        #                     [
+                        #                         dbc.Col(
+                        #                             dcc.Loading(
+                        #                                 html.H1(
+                        #                                     '0%',
+                        #                                     id = 'forecast_upe_value',
+                        #                                     style = {
+                        #                                         'color': '#1DC72D',
+                        #                                         'margin': '0',
+                        #                                         'font-size': '150px'
+                        #                                     }
+                        #                                 ),
+                        #                             ),
+                        #                             className = 'col-3',
+                        #                             style = {
+                        #                                 'display': 'flex',
+                        #                                 'align-items': 'center',
+                        #                                 'justify-content': 'center',
+                        #                                 'padding-right': '0'
+                        #                             }
+                        #                         ),
+                        #                         dbc.Col(
+                        #                             html.H5(
+                        #                                 'is the UPE for the product with the selected characteristics',
+                        #                                 style = {
+                        #                                     'margin': '0'
+                        #                                 }
+                        #                             ),
+                        #                             className = 'col-9',
+                        #                             style = {
+                        #                                 'display': 'flex',
+                        #                                 'align-items': 'center',
+                        #                                 'justify-content': 'center',
+                        #                                 'padding-left': '0'
+                        #                             }
+                        #                         )
+                        #                     ]
+                        #                 )
+                        #             ],
+                        #             className = 'card-body',
+                        #             style = {
+                        #                 'padding': '0'
+                        #             }
+                        #         ),
+                        #         className = 'card border-danger mb-3',
+                        #     ),
+                        #     className = 'col-6'
+                        # )
                     ]
                 ),
             ],
@@ -407,6 +428,16 @@ FORECASTS_PAGE = html.Div(
             style = {
                 'margin-top': '10px'
             }
-        )
+        ),
+        dbc.Modal(
+            [
+                dbc.ModalHeader("Error"),
+                dbc.ModalBody("You have to fill every input for the model to run properly"),
+                dbc.ModalFooter(
+                    dbc.Button("Close", id="close", className="ml-auto")
+                ),
+            ],
+            id="popup_forecast",
+        ),
     ]
 )

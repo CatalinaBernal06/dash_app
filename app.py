@@ -1,6 +1,9 @@
 """
-Module doc string
+Main
+
+This script runs the application. It contains important Dash components such as the body of the page, the URL, and all the callbacks. 
 """
+
 
 import dash
 from dash_bootstrap_components._components.DropdownMenu import DropdownMenu
@@ -17,6 +20,8 @@ from apps.forecasts_page import FORECASTS_PAGE
 from apps.about_page import ABOUT_PAGE
 
 import data
+
+import model.feature_engineering as fe
 
 """
 #  Page Layout
@@ -131,9 +136,13 @@ def select_box_table_geographic_description(demand_click, invoiced_click,dropdow
 @app.callback(
     [
         Output(component_id='forecast_demand_value', component_property='children'),
-        Output(component_id='forecast_upe_value', component_property='children'),
+        # Output(component_id='forecast_upe_value', component_property='children'),
+        Output(component_id='popup_forecast', component_property='is_open')
     ],
-    Input(component_id='forecasts_run', component_property='n_clicks'),
+    [
+        Input(component_id='forecasts_run', component_property='n_clicks'),
+        Input(component_id='close', component_property='n_clicks')
+    ],
     [
         State(component_id='forecasts_price', component_property='value'),
         State(component_id='forecasts_size', component_property='value'),
@@ -143,16 +152,48 @@ def select_box_table_geographic_description(demand_click, invoiced_click,dropdow
         State(component_id='forecasts_gender', component_property='value'),
         State(component_id='forecasts_expo_weight', component_property='value'),
         State(component_id='forecasts_page_number', component_property='value'),
-        State(component_id='forecasts_slider', component_property='value'),
+        # State(component_id='forecasts_slider', component_property='value'),
     ]
 )
-def set_prediction_values(clicks, price, size, group, color, expo_type, gender, expo_weight, page_number, error_margin):
+def set_prediction_values(clicks, clicks_close, price, size, group, color, expo_type, gender, expo_weight, page_number):
     if clicks == None:
-        return '0','0'
-    return "", ""
+        return '0', False
+    ctx = dash.callback_context
+    if ctx.triggered:
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+        if button_id == 'close':
+            return dash.no_update, False
+    if (price == None) | (size == None) | (group == None) | (color == None) | (expo_type == None) | (gender == None) | (expo_weight == None) | (page_number == None):
+        return '0', True
+    pred = data.fun_user_input(price, size, group, color, expo_type, gender, expo_weight, page_number)
+    return pred, False
+
+    
 """
 #  MAIN
 """
 app.config['suppress_callback_exceptions'] = True
 if __name__ == "__main__":
     app.run_server(debug=True)
+
+# def set_prediction_values(clicks, price, size, group, color, expo_type, gender, expo_weight, page_number, error_margin):
+#     if clicks == None:
+#         return '0','0'
+#     return "", ""
+# def set_prediction_values(clicks, price, size, group, color, expo_type, gender, expo_weight, page_number, zoom):
+#     if clicks == None:
+#         return '0','0'
+#     with open('model/config_dict.pkl', 'rb') as f:
+#         config_dict = pickle.load(f)
+#     with open('model/gbm.pkl', 'rb') as f:
+#         model = pickle.load(f)
+#     new_dat = {'precio': float(price), 'mundo': str(size), 'grupo_articulo': str(group),
+#             'color_comercial': str(color), 'expocision': str(expo_type), 'genero': str(gender),
+#             'peso_exhibicion': str(expo_weight), 'pagina': str(page_number), 'zomm_producto': str(zoom)}
+#     new_df = pd.DataFrame.from_dict(new_dat, orient='index').T
+#     new_df['z_price'] = (new_df['precio'] - config_dict['price_mean'])/config_dict['price_std']
+#     clean_new = fe.feature_cleaning(new_df)
+#     new_wide = pd.get_dummies(clean_new).reindex(columns = config_dict['wide_cols'], fill_value=0)
+#     X_new = pd.concat([clean_new[config_dict['num_cols']], new_wide], 1)
+#     new_pred = np.round(model.predict(X_new))
+#     return new_pred, '0'

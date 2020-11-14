@@ -1,3 +1,9 @@
+"""
+Home page
+
+Contains a short summary of the company and the problem.
+"""
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -117,7 +123,7 @@ HOME_PAGE = html.Div(
                     html.Div(
                             html.A(
                                 html.Img(
-                                    src='/../assets/assets/photos_/corr_one_2.jpeg',
+                                    src='/../assets/photos_/corr_one_2.jpeg',
                                     style = {
                                         'height':'100px',
                                         'padding-left': '20%'
@@ -132,7 +138,7 @@ HOME_PAGE = html.Div(
                     html.Div(
                             html.A(
                                 html.Img(
-                                    src='/../assets/assets/photos_/mintic_logo.jpeg',
+                                    src='/../assets/photos_/mintic_logo.jpeg',
                                     style = {
                                         'height': '100px',
                                         'padding-left': '25%'
@@ -151,183 +157,3 @@ HOME_PAGE = html.Div(
         ),
     ],
 )
-
-
-
-
-
-
-#    ## dbc.Col(
-#    [
-#     dbc.Row(
-#             [
-#              dbc.Col(
-#                      [
-#                       html.Div(
-#                                [
-#                                 # html.Div(
-#                                 #     'Header 1',
-#                                 #     className = 'card-header'
-#                                 # ),
-#                                 html.Div(
-#                                          [
-#                                           html.H4(
-#                                                   'Description',
-#                                                   className = 'card-title'
-#                                                   ),
-#                                           html.P(
-#                                                  'Characterization of demand and price compared to variables of your choice (only 2020)',
-#                                                  className = 'card-text'
-#                                                  ),
-#                                           html.A(
-#                                                  html.Button(
-#                                                              'Take me there',
-#                                                              className = 'btn btn-primary btn-sm',
-#                                                              type = 'button',
-#                                                              ),
-#                                                  href = 'Description'
-#                                                  ),
-#                                           ],
-#                                          className = 'card-body',
-#                                          )
-#                                 ],
-#                                className = 'card bg-secondary mb-3',
-#                                style = {
-#                                'max-width': '20rem',
-#                                }
-#                                )
-#                       ],
-#                      ),
-#              dbc.Col(
-#                      [
-#                       html.Div(
-#                                [
-#                                 # html.Div(
-#                                 #     'Header 2',
-#                                 #     className = 'card-header'
-#                                 # ),
-#                                 html.Div(
-#                                          [
-#                                           html.H4(
-#                                                   'Demand seen geographically',
-#                                                   className = 'card-title'
-#                                                   ),
-#                                           html.P(
-#                                                  'See how demand and price behave throughout the country',
-#                                                  className = 'card-text'
-#                                                  ),
-#                                           html.A(
-#                                                  html.Button(
-#                                                              'Take me there',
-#                                                              className = 'btn btn-primary btn-sm',
-#                                                              type = 'button',
-#                                                              ),
-#                                                  href = 'Geographic_Description'
-#                                                  ),
-#                                           ],
-#                                          className = 'card-body'
-#                                          )
-#                                 ],
-#                                className = 'card bg-secondary mb-3',
-#                                style = {
-#                                'max-width': '20rem'
-#                                }
-#                                )
-#                       ],
-#                      )
-#              ],
-#             ),
-#     dbc.Row(
-#             [
-#              dbc.Col(
-#                      [
-#                       html.Div(
-#                                [
-#                                 # html.Div(
-#                                 #     'Header 3',
-#                                 #     className = 'card-header'
-#                                 # ),
-#                                 html.Div(
-#                                          [
-#                                           html.H4(
-#                                                   'Forecasts',
-#                                                   className = 'card-title'
-#                                                   ),
-#                                           html.P(
-#                                                  'Predict demand based on different variables, including ones from the catalogue',
-#                                                  className = 'card-text'
-#                                                  ),
-#                                           html.A(
-#                                                  html.Button(
-#                                                              'Take me there',
-#                                                              className = 'btn btn-primary btn-sm',
-#                                                              type = 'button',
-#                                                              ),
-#                                                  href = 'Forecasts'
-#                                                  ),
-#                                           ],
-#                                          className = 'card-body'
-#                                          )
-#                                 ],
-#                                className = 'card bg-secondary mb-3',
-#                                style = {
-#                                'max-width': '20rem'
-#                                }
-#                                )
-#                       ],
-#                      ),
-#              dbc.Col(
-#                      [
-#                       html.Div(
-#                                [
-#                                 # html.Div(
-#                                 #     'Header 4',
-#                                 #     className = 'card-header'
-#                                 # ),
-#                                 html.Div(
-#                                          [
-#                                           html.H4(
-#                                                   'About',
-#                                                   className = 'card-title'
-#                                                   ),
-#                                           html.P(
-#                                                  'Know more about the creators of this project',
-#
-#                                                  className = 'card-text'
-#                                                  ),
-#                                           html.Br(),
-#                                           html.A(
-#                                                  html.Button(
-#                                                              'Take me there',
-#                                                              className = 'btn btn-primary btn-sm',
-#                                                              type = 'button',
-#                                                              ),
-#                                                  href = 'About'
-#                                                  ),
-#                                           ],
-#                                          className = 'card-body'
-#                                          )
-#                                 ],
-#                                className = 'card bg-secondary mb-3',
-#                                style = {
-#                                'max-width': '20rem'
-#                                }
-#                                )
-#                       ],
-#                      )
-#              ],
-#             ),
-#     ],
-#        width = {
-#            'size': 6,
-#                },
-#            )
-#            ],
-#            justify = 'center',
-#            style = {
-#                'margin': '100px',
-#     }
-#     )
-#         ],
-#)
-#

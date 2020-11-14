@@ -1,3 +1,10 @@
+"""
+Geographic description page
+
+Contains information about quantity demanded and quantity invoiced for a specified group of a product, as well as how demand changes over time for a specified department
+and group
+"""
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -52,7 +59,10 @@ GEOGRAPHIC_DESCRIPTION_PAGE = html.Div(
                                             #     }
                                             # ),
                                             html.P(
-                                                'Select a group to visualize demand throughout the country. You can also click over a department on the map to show how demand changes over time in the plot below',
+                                                """
+                                                Select a group to visualize quantity demanded and invoiced throughout the country. 
+                                                You can also click over a department on any of the maps to show how demand changes over time in the plot on the right.
+                                                """,
                                                 className = 'mb-0'
                                             )
                                         ],
