@@ -21,7 +21,6 @@ from apps.about_page import ABOUT_PAGE
 
 import data
 
-import model.feature_engineering as fe
 
 """
 #  Page Layout
@@ -175,25 +174,3 @@ def set_prediction_values(clicks, clicks_close, price, size, group, color, expo_
 app.config['suppress_callback_exceptions'] = True
 if __name__ == "__main__":
     app.run_server(debug=True)
-
-# def set_prediction_values(clicks, price, size, group, color, expo_type, gender, expo_weight, page_number, error_margin):
-#     if clicks == None:
-#         return '0','0'
-#     return "", ""
-# def set_prediction_values(clicks, price, size, group, color, expo_type, gender, expo_weight, page_number, zoom):
-#     if clicks == None:
-#         return '0','0'
-#     with open('model/config_dict.pkl', 'rb') as f:
-#         config_dict = pickle.load(f)
-#     with open('model/gbm.pkl', 'rb') as f:
-#         model = pickle.load(f)
-#     new_dat = {'precio': float(price), 'mundo': str(size), 'grupo_articulo': str(group),
-#             'color_comercial': str(color), 'expocision': str(expo_type), 'genero': str(gender),
-#             'peso_exhibicion': str(expo_weight), 'pagina': str(page_number), 'zomm_producto': str(zoom)}
-#     new_df = pd.DataFrame.from_dict(new_dat, orient='index').T
-#     new_df['z_price'] = (new_df['precio'] - config_dict['price_mean'])/config_dict['price_std']
-#     clean_new = fe.feature_cleaning(new_df)
-#     new_wide = pd.get_dummies(clean_new).reindex(columns = config_dict['wide_cols'], fill_value=0)
-#     X_new = pd.concat([clean_new[config_dict['num_cols']], new_wide], 1)
-#     new_pred = np.round(model.predict(X_new))
-#     return new_pred, '0'
