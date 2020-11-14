@@ -23,9 +23,11 @@ data = data.rename(columns = {'precio': 'Price', 'dda':'quantity demanded'})
 data_maps = pd.read_csv('campaign_with_departments.csv', sep = ',', encoding='latin-1')
 data_maps = data_maps.rename(columns = {'article group': 'article_group'})
 
+#Map info
 with open('colombia_geo.json') as file:
     colombia_geo = json.load(file)
 
+#Model
 with open('model/config_dict.pkl', 'rb') as f:
     config_dict = pickle.load(f)
 with open('model/gbm.pkl', 'rb') as f:
@@ -169,6 +171,7 @@ def demand_vs_price(v1,v2,v3):
 """
 ML Model
 """
+#As the model is in spanish, we had to mpa some of the inputs from english for the model to work correctly
 def fun_user_input(precio_usuario,grupo_talla_usuario, tipo_item, color,exposicion_usuario, genero, expo_weight, rango_pagina):
     data_user = pd.DataFrame(columns=['z_price', 'zoom', 'expo_weight',
         'size_group_0-18 mo', 'size_group_1-5 yo', 'size_group_6-16 yo',
@@ -183,11 +186,11 @@ def fun_user_input(precio_usuario,grupo_talla_usuario, tipo_item, color,exposici
         'page_group_(20, 40]', 'page_group_(40, 60]', 'page_group_(60, 100]',
         'page_group_(100, 140]'])
 
-    #AGREGAR FILA A PARAMETRIZAR
+    #create series used for predicting
     data_user = data_user.append(pd.Series(), ignore_index=True)
     data_user = data_user.fillna(0)
 
-    #CREAR DATOS ESTILO ALGORITMO
+    #creates data
     data_user['z_price'] = (precio_usuario - 55796.48)/  22988.660
 
     if rango_pagina < 21:
