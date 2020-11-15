@@ -125,8 +125,8 @@ HOME_PAGE = html.Div(
                                 html.Img(
                                     src='/../assets/photos_/corr_one_2.jpeg',
                                     style = {
-                                        'height':'100px',
-                                        'padding-left': '20%'
+                                        'height':'80px',
+                                        'padding-left': '5%'
                                     },
                                 ),
                                 href = 'https://www.correlation-one.com/'
@@ -140,7 +140,7 @@ HOME_PAGE = html.Div(
                                 html.Img(
                                     src='/../assets/photos_/mintic_logo.jpeg',
                                     style = {
-                                        'height': '100px',
+                                        'height': '75px',
                                         'padding-left': '25%'
                                     },
                                 ),
