@@ -79,7 +79,7 @@ GEOGRAPHIC_DESCRIPTION_PAGE = html.Div(
                                                         [
                                                             dbc.Col(
                                                                 html.H4('Group of the product'),
-                                                                className = 'col-4',
+                                                                className = 'col-5',
                                                                 style = {
                                                                     'margin': 'auto'
                                                                 }
